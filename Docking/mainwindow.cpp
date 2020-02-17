@@ -1,31 +1,45 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include "ui_inspector.h"
+#include <QMessageBox>
+#include <QFileDialog>
+#include "hierarchy.h"
+#include "inspector.h"
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    uiMainWindow(new Ui::MainWindow), uiInspector(new Ui::Inspector)
+    QMainWindow(parent),uiMainWindow(new Ui::MainWindow)
 {
     uiMainWindow->setupUi(this);
 
-    //create empu widget
-    QWidget* widget = new QWidget();
-    //execute setupUI
-    uiInspector->setupUi(widget);
-    //set the widget into the dock
-    uiMainWindow->dockInspector->setWidget(widget);
-
-    connect(uiMainWindow->actionLoad_File, SIGNAL(triggered()),this,SLOT(onLoadFile()));
+//    connect(uiMainWindow->actionLoad_File, SIGNAL(triggered()),this,SLOT(onLoadFile()));
+//    connect(uiMainWindow->actionSave_File, SIGNAL(triggered()),this,SLOT(onSaveFile()));
+    hierarchy = new Hierarchy();
+   uiMainWindow->dockHierarchy->setWidget(hierarchy);
+   inspector = new Inspector();
+   uiMainWindow->dockInspector->setWidget(inspector);
 }
 
 MainWindow::~MainWindow()
 {
     delete uiMainWindow;
-    delete uiInspector;
+
 }
 
 void MainWindow::onLoadFile()
 {
-    uiInspector->doubleSpinBox_2->setValue( uiInspector->doubleSpinBox_2->value()+1);
+    //uiTransform->doubleSpinBox_2->setValue( uiTransform->doubleSpinBox_2->value()+1);
+}
+
+void MainWindow::onSaveFile()
+{
+//    QMessageBox::StandardButton button = QMessageBox::question(this,"Exit App","Do you want to exit?");
+//    if(button == QMessageBox::Yes)
+//    {
+//        qApp->exit();
+//    }
+    QString path = QFileDialog::getOpenFileName(this,"Load File");
+    if(!path.isEmpty())
+    {
+        QMessageBox::information(this,"Info",path);
+    }
 }
