@@ -30,6 +30,6 @@ void Hierarchy::onRemoveEntity()
 
 void Hierarchy::onEntitySelected(int row)
 {
-    printf(std::to_string(row).data());
+
     emit entitySelected(row);
 }

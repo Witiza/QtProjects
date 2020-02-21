@@ -28,12 +28,14 @@ SOURCES += \
         hierarchy.cpp \
         inspector.cpp \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+        sceneview.cpp
 
 HEADERS += \
         hierarchy.h \
         inspector.h \
-        mainwindow.h
+        mainwindow.h \
+        sceneview.h
 
 FORMS += \
         hierarchy.ui \
@@ -41,6 +43,9 @@ FORMS += \
         mesh.ui \
         transform.ui
 
+QT   += opengl
+
+CONFIG += console
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin

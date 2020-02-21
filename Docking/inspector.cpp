@@ -7,9 +7,9 @@ Inspector::Inspector(QWidget* parent):QWidget (parent),uiTransform(new Ui::Trans
 {
     QVBoxLayout* layout = new QVBoxLayout();
 
-    QWidget* transformWidget = new QWidget;
+    transformWidget = new QWidget;
     uiTransform->setupUi(transformWidget);
-    QWidget* meshWidget = new QWidget;
+    meshWidget = new QWidget;
     uiMesh->setupUi(meshWidget);
 
     layout->addWidget(transformWidget);
@@ -21,4 +21,9 @@ Inspector::~Inspector()
 {
     delete uiTransform;
     delete uiMesh;
+}
+
+void Inspector::onEntitySelected(int row)
+{
+    printf(std::to_string(row).data());
 }

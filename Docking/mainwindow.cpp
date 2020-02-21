@@ -1,10 +1,13 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+
 #include <QMessageBox>
+#include <QVBoxLayout>
 #include <QFileDialog>
 #include "hierarchy.h"
 #include "inspector.h"
+#include "sceneview.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),uiMainWindow(new Ui::MainWindow)
@@ -13,10 +16,21 @@ MainWindow::MainWindow(QWidget *parent) :
 
 //    connect(uiMainWindow->actionLoad_File, SIGNAL(triggered()),this,SLOT(onLoadFile()));
 //    connect(uiMainWindow->actionSave_File, SIGNAL(triggered()),this,SLOT(onSaveFile()));
+
+
     hierarchy = new Hierarchy();
    uiMainWindow->dockHierarchy->setWidget(hierarchy);
    inspector = new Inspector();
    uiMainWindow->dockInspector->setWidget(inspector);
+
+   sceneView = new SceneView();
+
+   QVBoxLayout* layout = new QVBoxLayout();
+   layout->addWidget(sceneView);
+   uiMainWindow->centralWidget->setLayout(layout);
+   //uiMainWindow->
+
+   connect(hierarchy,SIGNAL(entitySelected(int)),inspector, SLOT(onEntitySelected(int)));
 }
 
 MainWindow::~MainWindow()
@@ -28,6 +42,7 @@ MainWindow::~MainWindow()
 void MainWindow::onLoadFile()
 {
     //uiTransform->doubleSpinBox_2->setValue( uiTransform->doubleSpinBox_2->value()+1);
+
 }
 
 void MainWindow::onSaveFile()
